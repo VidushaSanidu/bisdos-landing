@@ -15,7 +15,8 @@
         <p><strong>Name:</strong> {{ $data['name'] }}</p>
         <p><strong>Email:</strong> {{ $data['email'] }}</p>
         <p><strong>Phone:</strong> {{ $data['phone'] }}</p>
-        <p><strong>Address:</strong> {{ $data['address'] }}</p>
+        <p><strong>Card Type:</strong> {{ $data['card_type'] }}</p>
+        <p><strong>Message:</strong> {{ $data['message'] }}</p>
     @endif
 </body>
 

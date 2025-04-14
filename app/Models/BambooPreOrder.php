@@ -11,5 +11,5 @@ class BambooPreOrder extends Model
 
     protected $table = 'bamboo_pre_orders';
 
-    protected $fillable = ['name', 'email', 'phone', 'address'];
+    protected $fillable = ['name', 'email', 'phone', 'type', 'message', 'status'];
 }

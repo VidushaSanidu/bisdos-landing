@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('bamboo_pre_orders', function (Blueprint $table) {
@@ -16,14 +13,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone');
-            $table->text('address');
-            $table->timestamps(); // Adds created_at and updated_at
+            $table->enum('type', ['personal', 'team']);
+            $table->text('message');
+            $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('bamboo_pre_orders');

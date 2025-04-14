@@ -362,56 +362,199 @@
         .form-control::placeholder {
             color: rgba(255, 255, 255, 0.8);
         }
+
+        .split-modal {
+            display: flex;
+            max-height: 80vh;
+            overflow: auto;
+        }
+
+        .image-side {
+            flex: 1;
+            position: relative;
+            min-height: 400px;
+        }
+
+        .form-side {
+            flex: 1;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .image-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 1.5rem;
+            color: white;
+            z-index: 2;
+            overflow-y: auto;
+        }
+
+        .price-tag {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 15px;
+            margin-top: 1rem;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .discounted-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .badge-limited {
+            background: #FF5722;
+            font-size: 1.25rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .feature-list {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 1rem 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 0.4rem;
+            position: relative;
+            padding-left: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            color: #4CAF50;
+            position: absolute;
+            left: 0;
+        }
+
+        @media (max-width: 992px) {
+            .split-modal {
+                flex-direction: column;
+                max-height: 90vh;
+            }
+
+            .image-side,
+            .form-side {
+                min-height: auto;
+            }
+
+            .image-content {
+                position: relative;
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .modal-dialog {
+                margin: 0.5rem auto;
+            }
+
+            .image-content h4 {
+                font-size: 1.2rem;
+            }
+
+            .form-side h3 {
+                font-size: 1.3rem;
+            }
+        }
     </style>
 
     <div class="modal fade" id="modalCentered" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content rounded-5 p-0" style="margin: 10px 0;">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content rounded-5 border-0 p-0">
                 <div class="modal-body p-0">
-                    <div class="position-relative" style="height: 80vh;">
-                        <!-- Background Image -->
-                        <img src="assets/img/bamboo-card.jpg" class="w-100 h-100 object-fit-cover"
-                            alt="Background image">
+                    <div class="split-modal">
+                        <!-- Left Side - Image and Offer Details -->
+                        <div class="image-side">
+                            <!-- Background Image -->
+                            <img src="assets/img/bamboo-card.jpg" class="w-100 h-100 object-fit-cover"
+                                alt="Premium Bamboo NFC Card">
 
-                        <!-- Transparent Overlay -->
-                        <div class="overlay position-absolute w-100 h-100 start-0 top-0"
-                            style="background: rgba(0, 0, 0, 0.7);"></div>
+                            <!-- Transparent Overlay -->
+                            <div class="overlay position-absolute w-100 h-100 start-0 top-0"
+                                style="background: rgba(0, 0, 0, 0.7);"></div>
 
-                        <!-- Foreground Content -->
-                        <div class="position-absolute top-50 start-50 translate-middle w-100 p-4 text-white">
-                            <h4 class="mb-3 text-center">🌿 BisDos Bamboo Limited Edition 🌿</h4>
-                            <p class="text-center">
-                                Own an exclusive <strong>NFC-powered bamboo business card</strong> with
-                                <strong>laser engraving.</strong>
-                                Only <strong>100 available</strong>—sustainable, stylish, and built to last.
-                            </p>
-                            <p class="text-center">Secure yours now before they’re gone! 🚀</p>
+                            <!-- Content -->
+                            <div class="image-content">
+                                <span class="badge-limited">🚨 BisDos Bamboo NFC Card</span>
+                                <p class="mb-2 mt-2">🔥<strong>Special offer 3900/= </strong> <span
+                                        style="text-decoration: line-through; font-size: 0.7rem;">6500/=</span> </p>
+
+                                <ul class="feature-list">
+                                    <li>Premium NFC-powered bamboo card with laser engraving</li>
+                                    <li><strong>Lifetime</strong> free updates & support</li>
+                                    <li>Connect <strong>6 social media profiles</strong></li>
+                                    <li>Built-in <strong>lead capture system</strong></li>
+                                    <li><strong>Free personal portfolio website</strong></li>
+                                    <li>No hidden fees - <strong>ever</strong></li>
+                                </ul>
+
+                                <div class="mt-1">
+                                    <p class="text-warning mb-0">⏳ Only 100 Personal Cards & 20 Team Cards Left!</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Side - Form -->
+                        <div class="form-side bg-dark text-white">
+                            <h3 class="mb-3 text-center">Claim Your 40% Discount Now!</h3>
+                            <p class="small mb-3 text-center">Fill this form to lock in your lifetime deal</p>
 
                             <!-- Pre-Order Form -->
                             <form action="{{ route('preorder.submit') }}" method="POST">
                                 @csrf
-                                <div class="mb-3">
+                                <div class="mb-2">
                                     <input type="text"
                                         class="form-control rounded-pill border-white bg-transparent text-white"
-                                        placeholder="Name" name="name" required>
+                                        placeholder="Your Name" name="name" required>
                                 </div>
-                                <div class="mb-3">
+                                <div class="mb-2">
                                     <input type="email"
                                         class="form-control rounded-pill border-white bg-transparent text-white"
-                                        placeholder="Email" name="email" required>
+                                        placeholder="Email Address" name="email" required>
                                 </div>
-                                <div class="mb-3">
+                                <div class="mb-2">
                                     <input type="tel"
                                         class="form-control rounded-pill border-white bg-transparent text-white"
-                                        placeholder="Phone" name="phone" required>
+                                        placeholder="Phone Number" name="phone" required>
+                                </div>
+                                <div class="mb-2">
+                                    <select class="form-control rounded-pill border-white bg-transparent text-white"
+                                        name="card_type" required>
+                                        <option value="" disabled selected>Select Card Type</option>
+                                        <option value="personal" class="bg-dark text-white">Personal Card (₹3,900)
+                                        </option>
+                                        <option value="team" class="bg-dark text-white">Team Card (₹3,900)</option>
+                                    </select>
                                 </div>
                                 <div class="mb-3">
-                                    <input type="text"
-                                        class="form-control rounded-pill border-white bg-transparent text-white"
-                                        placeholder="Address" name="address" required>
+                                    <textarea style="border-radius: 1.5pc;" class="form-control border-white bg-transparent text-white"
+                                        placeholder="Your Message" name="message" rows="2" required></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-outline-light w-100 rounded-pill">Pre-Order
-                                    Now</button>
+                                <button type="submit" class="btn btn-success w-100 rounded-pill fw-bold py-2">
+                                    🔥 GET 40% OFF - LIMITED TIME
+                                </button>
+                                <p class="small mt-2 text-center">100% secure. We'll contact you to confirm details.</p>
                             </form>
                         </div>
                     </div>

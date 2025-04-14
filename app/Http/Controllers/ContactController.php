@@ -24,14 +24,17 @@ class ContactController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email',
             'phone' => 'required|string|max:20',
-            'address' => 'required|string|max:500',
+            'card_type' => 'required|in:personal,team',
+            'message' => 'required|string|max:500',
         ]);
 
         $preOrder = BambooPreOrder::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'address' => $request->address,
+            'type' => $request->card_type,
+            'message' => $request->message,
+            'status' => 'unseen'
         ]);
 
         Mail::to($request->email)->send(new PreOrderMail($request->all(), 'user'));
